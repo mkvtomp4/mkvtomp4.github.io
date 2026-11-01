@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ConverterBox from '../../components/ConverterBox.astro';
+import SeoContentBelowFold from '../../components/SeoContentBelowFold.astro';
+import { languages, type Lang } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  return Object.keys(languages)
+    .filter((lang) => lang !== 'en')
+    .map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+---
+
+<Layout lang={lang} currentPath="">
+  <!-- First Fold: 100% Dedicated to Primary H1 + Interactive Converter Box Div -->
+  <ConverterBox lang={lang} defaultMode="mkv-mp4" />
+
+  <!-- Below-the-Fold Technical SEO Content Architecture (Breadcrumbs + 4 Semantic Sections) -->
+  <SeoContentBelowFold lang={lang} currentPath="" />
+</Layout>

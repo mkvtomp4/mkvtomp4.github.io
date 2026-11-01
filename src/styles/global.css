@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Palette Tokens */
+  --electric-azure-blue: #3A86FF;
+  --soft-periwinkle-lavender: #BDB2FF;
+  --blush-rose-pink: #FFD6E0;
+  --warm-snow-alabaster: #FFF4F4;
+  --deep-ink-contrast-text: #0F172A;
+
+  /* Light Mode Default */
+  --bg-primary: #FFF4F4;
+  --bg-surface-card: #FFFFFF;
+  --workspace-box-bg: #FFFFFF;
+  --primary-action-button: #3A86FF;
+  --primary-action-text: #FFFFFF;
+  --secondary-accent-surface: #BDB2FF;
+  --highlight-pill-badge: #FFD6E0;
+  --border-color: #BDB2FF;
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
+  --dropzone-hover-bg: #FFF4F4;
+  --glass-header-bg: rgba(255, 244, 244, 0.88);
+}
+
+html.dark {
+  /* Dark Mode */
+  --bg-primary: #0B0F19;
+  --bg-surface-card: #131B2E;
+  --workspace-box-bg: #111827;
+  --primary-action-button: #3A86FF;
+  --primary-action-text: #FFFFFF;
+  --secondary-accent-surface: #BDB2FF;
+  --highlight-pill-badge: #2A1F3D;
+  --border-color: #2E3A59;
+  --text-primary: #FFF4F4;
+  --text-secondary: #CBD5E1;
+  --dropzone-hover-bg: rgba(58, 134, 255, 0.08);
+  --glass-header-bg: rgba(11, 15, 25, 0.88);
+}
+
+@layer base {
+  html {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    scroll-behavior: smooth;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 1.15rem;
+    line-height: 1.65;
+    transition: background-color 0.25s ease, color 0.25s ease;
+    overflow-x: hidden;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    font-weight: 800;
+  }
+
+  ::selection {
+    background-color: #3A86FF;
+    color: #FFFFFF;
+  }
+}
+
+/* Smooth Custom Animations & Interactive States */
+@keyframes pulseRing {
+  0% {
+    box-shadow: 0 0 0 0 rgba(58, 134, 255, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(58, 134, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(58, 134, 255, 0);
+  }
+}
+
+.btn-azure-primary {
+  background-color: #3A86FF;
+  color: #FFFFFF;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 25px -5px rgba(58, 134, 255, 0.45);
+}
+
+.btn-azure-primary:hover {
+  background-color: #2563EB;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px -6px rgba(58, 134, 255, 0.6);
+}
+
+.btn-azure-primary:active {
+  transform: translateY(0px);
+}
+
+.kofi-cta-btn {
+  background-color: #3A86FF;
+  color: #FFFFFF;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 6px 18px -4px rgba(58, 134, 255, 0.45);
+}
+
+.kofi-cta-btn:hover {
+  background-color: #2563EB;
+  box-shadow: 0 0 22px 4px #FFD6E0, 0 8px 20px -4px rgba(58, 134, 255, 0.6);
+  transform: translateY(-1.5px);
+}
+
+.dropzone-area {
+  border: 3px dashed var(--border-color);
+  background-color: var(--bg-surface-card);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dropzone-area:hover,
+.dropzone-area.drag-over {
+  border-color: #3A86FF;
+  background-color: var(--dropzone-hover-bg);
+  transform: scale(1.006);
+  box-shadow: 0 20px 45px -15px rgba(58, 134, 255, 0.22);
+}
+
+.progress-gradient-bar {
+  background: linear-gradient(90deg, #3A86FF 0%, #BDB2FF 50%, #3A86FF 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2.2s linear infinite;
+}

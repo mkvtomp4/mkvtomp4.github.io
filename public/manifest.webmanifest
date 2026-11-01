@@ -1,0 +1,20 @@
+{
+  "name": "MKVtoMP4 — Free MKV to MP4 Converter Online",
+  "short_name": "MKVtoMP4",
+  "description": "Free MKV to MP4 converter online. Instant 2-second lossless FFmpeg.wasm remuxing and universal H.264 transcoding 100% locally in your browser.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#FFF4F4",
+  "theme_color": "#3A86FF",
+  "categories": ["multimedia", "utilities", "productivity"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "192x192 512x512 any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

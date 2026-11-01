@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#FFF4F4"/>
+  <circle cx="1050" cy="110" r="220" fill="#FFD6E0" opacity="0.65"/>
+  <circle cx="140" cy="520" r="240" fill="#BDB2FF" opacity="0.45"/>
+  <rect x="80" y="75" width="1040" height="480" rx="44" fill="#FFFFFF" stroke="#BDB2FF" stroke-width="6"/>
+  <rect x="140" y="135" width="110" height="110" rx="28" fill="#3A86FF"/>
+  <polygon points="182 167 222 190 182 213" fill="#FFD6E0"/>
+  <text x="275" y="208" fill="#0F172A" font-family="system-ui, -apple-system, sans-serif" font-size="60" font-weight="800">MKVtoMP4.github.io</text>
+  <text x="140" y="325" fill="#0F172A" font-family="system-ui, -apple-system, sans-serif" font-size="54" font-weight="800">Free MKV to MP4 Converter Online</text>
+  <text x="140" y="395" fill="#334155" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="600">Instant 2-Second Lossless Remux (-c copy) &amp; Universal H.264</text>
+  <rect x="140" y="440" width="640" height="64" rx="32" fill="#FFD6E0"/>
+  <text x="175" y="482" fill="#0F172A" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="800">100% Local Browser RAM • Zero Cloud Uploads</text>
+</svg>

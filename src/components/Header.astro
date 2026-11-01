@@ -1,0 +1,412 @@
+---
+import { languages, useTranslations, getLocalizedPath, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  currentPath?: string;
+}
+
+const { lang, currentPath = '' } = Astro.props;
+const t = useTranslations(lang);
+const homeUrl = getLocalizedPath(lang, '');
+---
+
+<header
+  class="sticky top-0 z-50 w-full border-b border-borderTheme backdrop-blur-md transition-colors duration-200"
+  style="background-color: var(--glass-header-bg);"
+>
+  <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8">
+    <!-- Brand Logo + Title (Icon-only 48x48px on Mobile & Tablet < 1024px, Icon + Text on Desktop >= 1024px) -->
+    <a
+      href={homeUrl}
+      aria-label={t('nav.brand')}
+      class="group flex h-12 min-w-[48px] items-center gap-3 rounded-2xl px-1.5 transition-transform duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-azure"
+    >
+      <div
+        class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-azure text-white shadow-md transition-transform duration-200 group-hover:rotate-[-4deg]"
+      >
+        <!-- Crisp Video Film/Play Remux SVG Icon -->
+        <svg
+          class="h-6 w-6"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <rect x="2" y="3" width="20" height="18" rx="4"></rect>
+          <polygon points="10 8.5 16 12 10 15.5 10 8.5" fill="currentColor"></polygon>
+        </svg>
+      </div>
+      <div class="hidden lg:flex lg:flex-col">
+        <span class="font-display text-xl font-extrabold tracking-tight text-textPrimary">
+          MKV<span class="text-azure">to</span>MP4
+        </span>
+      </div>
+    </a>
+
+    <!-- Right Actions Bar (Strictly Icon-Only 48x48px on Mobile & Tablet < 1024px) -->
+    <div class="flex items-center gap-2 sm:gap-2.5">
+      <!-- 1. 8-Language Dropdown Selector -->
+      <div class="relative" id="lang-dropdown-wrapper">
+        <button
+          type="button"
+          id="lang-dropdown-btn"
+          aria-label={t('nav.language.aria')}
+          aria-haspopup="true"
+          aria-expanded="false"
+          class="flex h-12 w-12 lg:w-auto items-center justify-center gap-2 rounded-2xl border border-borderTheme bg-bgSurface px-0 lg:px-3.5 text-textPrimary transition-all duration-200 hover:border-azure hover:text-azure focus:outline-none focus:ring-2 focus:ring-azure"
+        >
+          <!-- Globe SVG Icon -->
+          <svg
+            class="h-6 w-6 shrink-0 text-azure"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span class="hidden lg:inline-block text-sm font-bold uppercase tracking-wide">
+            {lang}
+          </span>
+          <svg
+            class="hidden lg:inline-block h-4 w-4 opacity-75"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
+
+        <!-- Dropdown Menu -->
+        <div
+          id="lang-dropdown-menu"
+          role="menu"
+          aria-orientation="vertical"
+          aria-label={t('nav.language.aria')}
+          class="invisible absolute right-0 mt-2 w-56 origin-top-right scale-95 rounded-2xl border-2 border-borderTheme bg-bgSurface p-2 opacity-0 shadow-workspace transition-all duration-150 focus:outline-none z-50"
+        >
+          <div class="grid grid-cols-1 gap-1">
+            {
+              Object.entries(languages).map(([code, info]) => {
+                const isCurrent = code === lang;
+                const targetHref = getLocalizedPath(code as Lang, currentPath);
+                return (
+                  <a
+                    href={targetHref}
+                    role="menuitem"
+                    aria-label={`${info.nativeName} (${code.toUpperCase()})`}
+                    class:list={[
+                      'flex items-center justify-between rounded-xl px-3 py-2.5 text-sm font-semibold transition-colors',
+                      isCurrent
+                        ? 'bg-azure text-white'
+                        : 'text-textPrimary hover:bg-pillBadge hover:text-textPrimary',
+                    ]}
+                  >
+                    <span class="flex items-center gap-2.5">
+                      <span class="text-base leading-none" aria-hidden="true">{info.flag}</span>
+                      <span>{info.nativeName}</span>
+                    </span>
+                    <span class="text-xs uppercase opacity-75">{code}</span>
+                  </a>
+                );
+              })
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Light / Dark Mode Toggle Button -->
+      <button
+        type="button"
+        id="theme-toggle-btn"
+        aria-label={t('nav.theme.aria')}
+        class="flex h-12 w-12 items-center justify-center rounded-2xl border border-borderTheme bg-bgSurface text-textPrimary transition-all duration-200 hover:border-azure hover:text-azure focus:outline-none focus:ring-2 focus:ring-azure"
+      >
+        <!-- Sun Icon (shown in dark mode) -->
+        <svg
+          id="theme-icon-sun"
+          class="hidden h-6 w-6 text-amber-400"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <!-- Moon Icon (shown in light mode) -->
+        <svg
+          id="theme-icon-moon"
+          class="h-6 w-6 text-azure"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <!-- 3. Install PWA Button ('Add to Home Screen') + Visual 1-Step Tooltip -->
+      <div class="relative" id="pwa-install-wrapper">
+        <button
+          type="button"
+          id="pwa-install-btn"
+          aria-label={t('nav.pwa.aria')}
+          aria-expanded="false"
+          data-installed-text={t('nav.pwa.installed')}
+          class="flex h-12 w-12 lg:w-auto items-center justify-center gap-2 rounded-2xl border border-borderTheme bg-bgSurface px-0 lg:px-3.5 text-textPrimary transition-all duration-200 hover:border-azure hover:text-azure focus:outline-none focus:ring-2 focus:ring-azure"
+        >
+          <!-- Add to Home Screen / Install Device SVG Icon -->
+          <svg
+            class="h-6 w-6 shrink-0 text-azure"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="4" y="2" width="16" height="20" rx="3"></rect>
+            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+            <path d="M12 7v6"></path>
+            <path d="M9.5 10.5L12 13l2.5-2.5"></path>
+          </svg>
+          <span id="pwa-install-text" class="hidden lg:inline-block text-sm font-bold">
+            {t('nav.pwa.label')}
+          </span>
+        </button>
+
+        <!-- 1-Step Visual Tooltip for iOS Safari / macOS / Desktop -->
+        <div
+          id="pwa-visual-tooltip"
+          role="dialog"
+          aria-label={t('nav.pwa.tooltip.title')}
+          class="invisible absolute right-0 mt-2 w-72 sm:w-80 origin-top-right scale-95 rounded-2xl border-2 border-azure bg-bgSurface p-4 opacity-0 shadow-workspace transition-all duration-150 z-50"
+        >
+          <div class="flex items-start justify-between gap-2">
+            <div class="flex items-center gap-2">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-azure text-white">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M12 3v12"></path>
+                  <path d="m8 11 4 4 4-4"></path>
+                  <rect x="4" y="17" width="16" height="4" rx="1"></rect>
+                </svg>
+              </span>
+              <h3 class="font-display text-sm font-extrabold text-textPrimary">
+                {t('nav.pwa.tooltip.title')}
+              </h3>
+            </div>
+            <button
+              type="button"
+              id="pwa-tooltip-close"
+              aria-label={t('nav.pwa.tooltip.close')}
+              class="rounded-lg px-2 py-0.5 text-xs font-bold text-textSecondary hover:bg-pillBadge hover:text-textPrimary"
+            >
+              ✕
+            </button>
+          </div>
+          <p
+            id="pwa-tooltip-msg-ios"
+            class="mt-2.5 hidden text-xs leading-relaxed text-textSecondary"
+          >
+            {t('nav.pwa.tooltip.ios')}
+          </p>
+          <p
+            id="pwa-tooltip-msg-desktop"
+            class="mt-2.5 text-xs leading-relaxed text-textSecondary"
+          >
+            {t('nav.pwa.tooltip.desktop')}
+          </p>
+          <button
+            type="button"
+            id="pwa-tooltip-gotit"
+            class="mt-3 w-full rounded-xl bg-azure py-2 text-xs font-extrabold text-white transition hover:bg-blue-600"
+          >
+            {t('nav.pwa.tooltip.close')}
+          </button>
+        </div>
+      </div>
+
+      <!-- 4. CTA Button: 'Support the Developer' linking to https://ko-fi.com/kishara -->
+      <a
+        href="https://ko-fi.com/kishara"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={t('nav.support.aria')}
+        class="kofi-cta-btn flex h-12 w-12 lg:w-auto items-center justify-center gap-2 rounded-2xl px-0 lg:px-4 font-bold text-white focus:outline-none focus:ring-2 focus:ring-blush"
+      >
+        <!-- Heart SVG Icon -->
+        <svg
+          class="h-6 w-6 shrink-0 fill-[#FFD6E0] text-[#FFD6E0] transition-transform duration-200 group-hover:scale-110"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path
+            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+          ></path>
+        </svg>
+        <span class="hidden lg:inline-block text-sm font-bold tracking-tight">
+          {t('nav.support.label')}
+        </span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    // Theme toggle logic
+    const themeBtn = document.getElementById('theme-toggle-btn');
+    const sunIcon = document.getElementById('theme-icon-sun');
+    const moonIcon = document.getElementById('theme-icon-moon');
+
+    function syncThemeIcons() {
+      const isDark = document.documentElement.classList.contains('dark');
+      if (isDark) {
+        sunIcon?.classList.remove('hidden');
+        moonIcon?.classList.add('hidden');
+      } else {
+        sunIcon?.classList.add('hidden');
+        moonIcon?.classList.remove('hidden');
+      }
+    }
+
+    syncThemeIcons();
+
+    themeBtn?.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('mkvtomp4-theme', isDark ? 'dark' : 'light');
+      syncThemeIcons();
+    });
+
+    // Language dropdown logic
+    const langBtn = document.getElementById('lang-dropdown-btn');
+    const langMenu = document.getElementById('lang-dropdown-menu');
+    const langWrapper = document.getElementById('lang-dropdown-wrapper');
+
+    function closeLangMenu() {
+      langMenu?.classList.add('invisible', 'opacity-0', 'scale-95');
+      langBtn?.setAttribute('aria-expanded', 'false');
+    }
+
+    function toggleLangMenu() {
+      const isClosed = langMenu?.classList.contains('invisible');
+      if (isClosed) {
+        langMenu?.classList.remove('invisible', 'opacity-0', 'scale-95');
+        langBtn?.setAttribute('aria-expanded', 'true');
+      } else {
+        closeLangMenu();
+      }
+    }
+
+    langBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleLangMenu();
+    });
+
+    // PWA Add to Home Screen prompt & 1-step visual tooltip logic
+    let deferredPrompt = null;
+    const pwaWrapper = document.getElementById('pwa-install-wrapper');
+    const pwaBtn = document.getElementById('pwa-install-btn');
+    const pwaText = document.getElementById('pwa-install-text');
+    const pwaTooltip = document.getElementById('pwa-visual-tooltip');
+    const pwaCloseBtn = document.getElementById('pwa-tooltip-close');
+    const pwaGotItBtn = document.getElementById('pwa-tooltip-gotit');
+    const pwaIosMsg = document.getElementById('pwa-tooltip-msg-ios');
+    const pwaDesktopMsg = document.getElementById('pwa-tooltip-msg-desktop');
+
+    function closePwaTooltip() {
+      pwaTooltip?.classList.add('invisible', 'opacity-0', 'scale-95');
+      pwaBtn?.setAttribute('aria-expanded', 'false');
+    }
+
+    function openPwaTooltip() {
+      const isApple = /Macintosh|iPhone|iPad|iPod/.test(navigator.userAgent);
+      if (isApple) {
+        pwaIosMsg?.classList.remove('hidden');
+        pwaDesktopMsg?.classList.add('hidden');
+      } else {
+        pwaIosMsg?.classList.add('hidden');
+        pwaDesktopMsg?.classList.remove('hidden');
+      }
+      pwaTooltip?.classList.remove('invisible', 'opacity-0', 'scale-95');
+      pwaBtn?.setAttribute('aria-expanded', 'true');
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
+
+    pwaBtn?.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted' && pwaText) {
+          pwaText.textContent = pwaBtn.getAttribute('data-installed-text') || 'Installed';
+        }
+        deferredPrompt = null;
+      } else {
+        const isClosed = pwaTooltip?.classList.contains('invisible');
+        if (isClosed) {
+          openPwaTooltip();
+        } else {
+          closePwaTooltip();
+        }
+      }
+    });
+
+    pwaCloseBtn?.addEventListener('click', closePwaTooltip);
+    pwaGotItBtn?.addEventListener('click', closePwaTooltip);
+
+    document.addEventListener('click', (e) => {
+      if (langWrapper && !langWrapper.contains(e.target)) {
+        closeLangMenu();
+      }
+      if (pwaWrapper && !pwaWrapper.contains(e.target)) {
+        closePwaTooltip();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLangMenu();
+        closePwaTooltip();
+      }
+    });
+  })();
+</script>
