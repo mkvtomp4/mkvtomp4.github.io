@@ -10,7 +10,7 @@
 [![100% Client-Side Privacy](https://img.shields.io/badge/Privacy-100%25_Client--Side_RAM-BDB2FF?style=for-the-badge&logo=shield&logoColor=0F172A)](https://mkvtomp4.github.io/)
 [![PWA Offline Ready](https://img.shields.io/badge/PWA-100%25_Offline_Ready-FFD6E0?style=for-the-badge&logo=pwa&logoColor=0F172A)](https://mkvtomp4.github.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-0F172A?style=for-the-badge)](./LICENSE)
-[![Support on Ko-fi](https://img.shields.io/badge/Support_the_Developer-Ko--fi-FF5E5B?style=for-the-badge&logo=kofi&logoColor=white)](https://ko-fi.com/kishara)
+[![Support the Developer](https://img.shields.io/badge/Support_the_Developer-Buy_Me_a_Coffee-FF5E5B?style=for-the-badge&logo=buymeacoffee&logoColor=white)](https://kisharadilshan.gumroad.com/coffee)
 
 </div>
 
@@ -49,9 +49,9 @@ Designed around a **Soft Pastel & Electric Blue** visual hierarchy with an unclu
 
 | Palette Token | Hex Code | Role in Light & Dark Theme System |
 | :--- | :--- | :--- |
-| **Electric Azure Blue** | `#3A86FF` | Primary action buttons (`Select MKV Video`, `Convert Video Now`, `Download MP4 File`), active format pills, dropzone hover border, and Ko-fi CTA background. |
+| **Electric Azure Blue** | `#3A86FF` | Primary action buttons (`Select MKV Video`, `Convert Video Now`, `Download MP4 File`), active format pills, dropzone hover border, and Support CTA background. |
 | **Soft Periwinkle Lavender** | `#BDB2FF` | Secondary accent surfaces, default dashed dropzone border, workspace card borders, and animated progress bar gradient (`#3A86FF` → `#BDB2FF`). |
-| **Blush Rose Pink** | `#FFD6E0` | Privacy & offline highlight pill badges (`100% Local Browser RAM Processing`), Ko-fi CTA hover glow, and interactive pill highlights. |
+| **Blush Rose Pink** | `#FFD6E0` | Privacy & offline highlight pill badges (`100% Local Browser RAM Processing`), Support CTA hover glow, and interactive pill highlights. |
 | **Warm Snow Alabaster** | `#FFF4F4` | Default Light Mode primary background (`--bg-primary`), dropzone active hover inner tint, and high-contrast text in Dark Mode (`#0B0F19`). |
 | **Deep Ink Contrast Text** | `#0F172A` | Primary high-contrast body and display typography in Light Mode (AAA contrast compliance). |
 
@@ -104,9 +104,9 @@ npm run preview
 
 **MKVtoMP4** is 100% free, ad-free, and open-source with zero file size restrictions or paywalls. If this tool saved you time converting your videos, please consider supporting ongoing development:
 
-[![Support Kishara on Ko-fi](https://img.shields.io/badge/☕_Support_the_Developer_on_Ko--fi-ko--fi.com%2Fkishara-3A86FF?style=for-the-badge&logo=kofi&logoColor=FFD6E0)](https://ko-fi.com/kishara)
+[![Support Kishara](https://img.shields.io/badge/☕_Support_the_Developer-kisharadilshan.gumroad.com-3A86FF?style=for-the-badge&logo=gumroad&logoColor=FFD6E0)](https://kisharadilshan.gumroad.com/coffee)
 
-👉 **[https://ko-fi.com/kishara](https://ko-fi.com/kishara)**
+👉 **[https://kisharadilshan.gumroad.com/coffee](https://kisharadilshan.gumroad.com/coffee)**
 
 ---
 
